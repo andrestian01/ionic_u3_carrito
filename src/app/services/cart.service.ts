@@ -11,8 +11,7 @@ import { Buy } from '../models/buy.model';
     public favoriteItems:Product[]=[];
     public buys:Buy[] = [];
     public quantity: number = 1;
-    public totalCartPrice: number = 0; // Variable para el precio total del carrito
-
+    public totalCartPrice: number = 0; 
     isEmpty(): boolean {
       return this.cartItems.length === 0;
     }
@@ -21,13 +20,12 @@ import { Buy } from '../models/buy.model';
         const existingProduct = this.cartItems.find((item) => item.name === product.name);
       
         if (existingProduct) {
-          existingProduct.quantity += 1; // Incrementa la cantidad
+          existingProduct.quantity += 1; 
         } else {
-          product.quantity = 1; // Inicializa la cantidad en 1 para un nuevo producto
+          product.quantity = 1; 
           this.cartItems.push(product);
         }
       
-        // Calcula el precio total del carrito después de agregar un producto
         this.totalCartPrice = this.calculateCartTotal();
     }
   
@@ -36,14 +34,13 @@ import { Buy } from '../models/buy.model';
       
         if (index !== -1) {
           if (product.quantity > 1) {
-            // Si la cantidad es mayor que 1, disminuye la cantidad en 1
             product.quantity -= 1;
           } else {
-            // Si la cantidad es 1, elimina el producto del carrito
+
             this.cartItems.splice(index, 1);
           }
       
-          // Calcula el precio total del carrito después de eliminar un producto
+
           this.totalCartPrice = this.calculateCartTotal();
         }
     }
@@ -62,12 +59,12 @@ import { Buy } from '../models/buy.model';
 
     clearCart() {
       const newBuy: Buy = {
-        products: [...this.cartItems], // Copia de los productos en el carrito
+        products: [...this.cartItems], 
         total: this.totalCartPrice,
-        date: new Date() // Fecha actual
+        date: new Date()
       };
-      this.buys.push(newBuy); // Agrega la nueva compra al historial de compras
-      this.cartItems = []; // Vacía el carrito después de la compra
+      this.buys.push(newBuy); 
+      this.cartItems = []; 
       return this.cartItems;
     }
 
